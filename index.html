@@ -356,6 +356,192 @@
             box-shadow: 0 6px 20px rgba(0, 123, 255, 0.4);
         }
 
+        .btn-large {
+            padding: 22px 60px;
+            font-size: 1.3em;
+        }
+
+        /* Features Grid */
+        .features {
+            padding: 60px 20px;
+        }
+
+        .features h2 {
+            animation: fadeInDown 0.8s ease-out;
+        }
+
+        body.light-theme .features h2 {
+            color: #007bff;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .feature-box {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(0, 212, 255, 0.3);
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        body.light-theme .feature-box {
+            background: rgba(255, 255, 255, 0.9);
+            border-color: rgba(0, 123, 255, 0.3);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+        }
+
+        .feature-box:hover {
+            transform: translateY(-10px);
+            border-color: #00d4ff;
+            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.3);
+        }
+
+        body.light-theme .feature-box:hover {
+            border-color: #007bff;
+            box-shadow: 0 10px 30px rgba(0, 123, 255, 0.2);
+        }
+
+        .feature-icon-large {
+            font-size: 3.5em;
+            margin-bottom: 15px;
+            filter: drop-shadow(0 0 10px rgba(0, 212, 255, 0.5));
+        }
+
+        .feature-box h3 {
+            color: #00d4ff;
+            margin-bottom: 10px;
+            font-size: 1.3em;
+        }
+
+        body.light-theme .feature-box h3 {
+            color: #007bff;
+        }
+
+        .feature-box p {
+            color: #b0b0b0;
+            font-size: 0.95em;
+            line-height: 1.5;
+        }
+
+        body.light-theme .feature-box p {
+            color: #4a5568;
+        }
+
+        /* Stats Section */
+        .stats-section {
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+        .stats-section h2 {
+            animation: fadeInDown 0.8s ease-out;
+        }
+
+        body.light-theme .stats-section h2 {
+            color: #007bff;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .stat-card {
+            background: rgba(0, 212, 255, 0.1);
+            border: 2px solid rgba(0, 212, 255, 0.3);
+            padding: 30px 20px;
+            border-radius: 15px;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        body.light-theme .stat-card {
+            background: rgba(0, 123, 255, 0.08);
+            border-color: rgba(0, 123, 255, 0.3);
+        }
+
+        .stat-card:hover {
+            transform: scale(1.1);
+            border-color: #00d4ff;
+            box-shadow: 0 0 30px rgba(0, 212, 255, 0.5);
+        }
+
+        body.light-theme .stat-card:hover {
+            border-color: #007bff;
+            box-shadow: 0 0 30px rgba(0, 123, 255, 0.3);
+        }
+
+        .stat-number {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #00d4ff;
+            margin-bottom: 5px;
+        }
+
+        body.light-theme .stat-number {
+            color: #007bff;
+        }
+
+        .stat-label {
+            font-size: 1em;
+            color: #b0b0b0;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        body.light-theme .stat-label {
+            color: #4a5568;
+        }
+
+        /* Download CTA */
+        .download-cta {
+            text-align: center;
+            padding: 80px 20px;
+            background: rgba(0, 212, 255, 0.08);
+            border-radius: 20px;
+            margin: 40px 20px;
+            backdrop-filter: blur(10px);
+            animation: fadeInUp 1s ease-out;
+        }
+
+        body.light-theme .download-cta {
+            background: rgba(0, 123, 255, 0.08);
+        }
+
+        .download-cta h2 {
+            font-size: 2.5em;
+            color: #ffffff;
+            margin-bottom: 15px;
+        }
+
+        body.light-theme .download-cta h2 {
+            color: #1a202c;
+        }
+
+        .download-cta p {
+            font-size: 1.2em;
+            color: #c0c0c0;
+            margin-bottom: 30px;
+        }
+
+        body.light-theme .download-cta p {
+            color: #4a5568;
+        }
+
         /* Animations */
         @keyframes fadeIn {
             from { opacity: 0; }
@@ -548,6 +734,64 @@
             <div>
                 <button class="btn btn-primary" onclick="downloadVPN()"><span>📱 Скачать для Android</span></button>
             </div>
+        </section>
+
+        <!-- Features Grid -->
+        <section class="features">
+            <h2 style="text-align: center; font-size: 2em; margin-bottom: 30px; color: #00d4ff;">🌟 Преимущества SecureVPN</h2>
+            <div class="features-grid">
+                <div class="feature-box">
+                    <div class="feature-icon-large">⚡</div>
+                    <h3>Максимальная скорость</h3>
+                    <p>Высокоскоростные серверы без ограничений скорости для комфортного просмотра и загрузки</p>
+                </div>
+                <div class="feature-box">
+                    <div class="feature-icon-large">🛡️</div>
+                    <h3>Защита данных</h3>
+                    <p>AES-256 шифрование военного уровня для защиты всех ваших данных</p>
+                </div>
+                <div class="feature-box">
+                    <div class="feature-icon-large">🌍</div>
+                    <h3>50+ стран</h3>
+                    <p>Более 1000 серверов по всему миру для обхода любых ограничений</p>
+                </div>
+                <div class="feature-box">
+                    <div class="feature-icon-large">🇷🇺</div>
+                    <h3>Работает в России</h3>
+                    <p>Специально оптимизирован для стабильной работы в РФ</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Stats Section -->
+        <section class="stats-section">
+            <h2 style="text-align: center; font-size: 2em; margin-bottom: 30px; color: #00d4ff;">📊 Статистика</h2>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number">50+</div>
+                    <div class="stat-label">Стран</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">1000+</div>
+                    <div class="stat-label">Серверов</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">99.9%</div>
+                    <div class="stat-label">Uptime</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">24/7</div>
+                    <div class="stat-label">Поддержка</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Download CTA -->
+        <section class="download-cta">
+            <h2>🚀 Начните прямо сейчас!</h2>
+            <p>Скачайте SecureVPN и получите 7 дней бесплатного использования</p>
+            <button class="btn btn-primary btn-large" onclick="downloadVPN()"><span>📥 Скачать бесплатно</span></button>
+            <p style="margin-top: 15px; font-size: 0.9em; opacity: 0.7;">Без регистрации карты • Без обязательств</p>
         </section>
     </div>
 
