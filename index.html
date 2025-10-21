@@ -6,7 +6,7 @@
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
-    <title>SecureVPN - Безопасный VPN для России v2.2</title>
+    <title>SecureVPN - Безопасный VPN для России v2.3</title>
     <script src="https://telegram.org/js/telegram-web-app.js?v=2.2"></script>
     <style>
         * {
@@ -698,7 +698,7 @@
 <body>
     <!-- Version indicator -->
     <div style="position: fixed; bottom: 5px; right: 5px; background: rgba(0,0,0,0.5); color: white; padding: 3px 8px; font-size: 10px; border-radius: 3px; z-index: 10000;">
-        v2.2
+        v2.3
     </div>
     
     <!-- Theme Toggle -->
@@ -837,21 +837,33 @@
             
             if (body.classList.contains('light-theme')) {
                 themeIcon.textContent = '☀️';
-                localStorage.setItem('theme', 'light');
+                try {
+                    localStorage.setItem('theme', 'light');
+                } catch (e) {
+                    console.log('localStorage not available');
+                }
             } else {
                 themeIcon.textContent = '🌙';
-                localStorage.setItem('theme', 'dark');
+                try {
+                    localStorage.setItem('theme', 'dark');
+                } catch (e) {
+                    console.log('localStorage not available');
+                }
             }
         }
 
         // Load saved theme
         window.addEventListener('DOMContentLoaded', () => {
-            const savedTheme = localStorage.getItem('theme');
-            const themeIcon = document.querySelector('.theme-icon');
-            
-            if (savedTheme === 'light') {
-                document.body.classList.add('light-theme');
-                themeIcon.textContent = '☀️';
+            try {
+                const savedTheme = localStorage.getItem('theme');
+                const themeIcon = document.querySelector('.theme-icon');
+                
+                if (savedTheme === 'light') {
+                    document.body.classList.add('light-theme');
+                    themeIcon.textContent = '☀️';
+                }
+            } catch (e) {
+                console.log('localStorage not available - using default theme');
             }
         });
 
