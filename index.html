@@ -821,25 +821,6 @@
             console.log('Telegram WebApp initialized');
             console.log('Platform:', tg.platform);
             console.log('Is in Telegram:', isInTelegram);
-
-            // Настраиваем MainButton для скачивания (только для мобильных)
-            if (isInTelegram && (tg.platform === 'android' || tg.platform === 'ios')) {
-                console.log('Setting up MainButton for mobile');
-                tg.MainButton.setText('📥 Скачать VPN');
-                tg.MainButton.show();
-                
-                // Обработчик нажатия на MainButton
-                tg.MainButton.onClick(function() {
-                    console.log('MainButton clicked!');
-                    tg.MainButton.showProgress();
-                    tg.MainButton.setText('Отправка файла...');
-                    
-                    // Отправляем данные боту
-                    tg.sendData('download_apk');
-                });
-            } else if (isInTelegram) {
-                console.log('Desktop Telegram detected - buttons on page will work');
-            }
         });
 
         // Theme Toggle Function
@@ -876,29 +857,15 @@
             console.log('tg:', tg);
             
             if (isInTelegram && tg) {
-                console.log('Sending data to bot...');
+                console.log('In Telegram - closing and redirecting to bot');
                 
-                // Определяем платформу
-                const platform = tg.platform || 'unknown';
-                console.log('Platform:', platform);
+                // Показываем уведомление
+                tg.showAlert('✅ Возвращаемся в чат...\n\nНажмите кнопку "Скачать VPN" в сообщении от бота для получения файла.');
                 
-                // Для десктопа показываем popup, для мобильного - прогресс
-                if (platform === 'tdesktop' || platform === 'web' || platform === 'weba' || platform === 'webk') {
-                    // Desktop версия - показываем popup с информацией
-                    tg.showAlert('📥 Отправка файла...\n\nФайл будет отправлен в чат через несколько секунд.');
-                } else {
-                    // Mobile версия
-                    tg.showPopup({
-                        title: '📱 Скачивание VPN',
-                        message: 'Файл будет отправлен в чат через несколько секунд...',
-                        buttons: [{type: 'ok'}]
-                    });
-                }
-                
-                // Отправляем данные боту
-                console.log('Calling tg.sendData()');
-                tg.sendData('download_apk');
-                console.log('Data sent!');
+                // Закрываем Mini App
+                setTimeout(function() {
+                    tg.close();
+                }, 1500);
             } else {
                 console.log('Not in Telegram - showing alert');
                 // Если открыто в обычном браузере - показываем инструкцию
