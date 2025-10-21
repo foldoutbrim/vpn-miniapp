@@ -696,11 +696,6 @@
     </style>
 </head>
 <body>
-    <!-- Debug info -->
-    <div id="debug-info" style="position: fixed; top: 10px; left: 10px; background: rgba(0,0,0,0.8); color: white; padding: 10px; font-size: 12px; z-index: 9999; border-radius: 5px;">
-        Загрузка...
-    </div>
-    
     <!-- Theme Toggle -->
     <button class="theme-toggle" onclick="toggleTheme()" aria-label="Переключить тему">
         <span class="theme-icon">🌙</span>
@@ -804,68 +799,39 @@
     </div>
 
     <script>
-        // Функция для обновления debug info
-        function updateDebug(msg) {
-            const debug = document.getElementById('debug-info');
-            if (debug) {
-                debug.innerHTML += '<br>' + msg;
-            }
-        }
+        // Глобальные переменные
+        let tg = null;
+        let isInTelegram = false;
         
         // Ждем полной загрузки страницы
         window.addEventListener('load', function() {
-            updateDebug('Page loaded');
-            
             // Проверяем наличие Telegram WebApp
             if (!window.Telegram || !window.Telegram.WebApp) {
-                updateDebug('ERROR: Telegram WebApp not found!');
+                console.log('Not in Telegram environment');
                 return;
             }
             
             // Инициализация Telegram Web App
-            let tg = window.Telegram.WebApp;
-            updateDebug('Telegram WebApp found');
-            
+            tg = window.Telegram.WebApp;
             tg.expand();
-            updateDebug('Expanded');
-            
-            console.log('Telegram WebApp loaded:', tg);
-            console.log('initData:', tg.initData);
 
             // Определяем, запущено ли приложение в Telegram
-            const isInTelegram = tg.initData !== '';
-            updateDebug('Is in Telegram: ' + isInTelegram);
-            console.log('Is in Telegram:', isInTelegram);
+            isInTelegram = tg.initData !== '';
 
             // Настраиваем MainButton для скачивания
             if (isInTelegram) {
-                updateDebug('Setting up MainButton...');
-                console.log('Setting up MainButton...');
                 tg.MainButton.setText('📥 Скачать VPN');
                 tg.MainButton.show();
-                updateDebug('MainButton shown!');
                 
                 // Обработчик нажатия на MainButton
                 tg.MainButton.onClick(function() {
-                    updateDebug('MainButton clicked!');
-                    console.log('MainButton clicked!');
                     tg.MainButton.showProgress();
                     tg.MainButton.setText('Отправка файла...');
                     
                     // Отправляем данные боту
                     tg.sendData('download_apk');
                 });
-                console.log('MainButton configured successfully');
-            } else {
-                updateDebug('Not in Telegram - MainButton hidden');
-                console.log('Not in Telegram, MainButton not shown');
             }
-            
-            // Скрываем debug через 5 секунд
-            setTimeout(function() {
-                const debug = document.getElementById('debug-info');
-                if (debug) debug.style.display = 'none';
-            }, 5000);
         });
 
         // Theme Toggle Function
@@ -897,16 +863,19 @@
 
         // Функция скачивания VPN (для кнопок внутри страницы)
         function downloadVPN() {
-            if (isInTelegram) {
-                // Показываем уведомление, что нужно использовать MainButton
+            if (isInTelegram && tg) {
+                // Если в Telegram - отправляем данные боту напрямую
                 tg.showPopup({
                     title: '📱 Скачивание VPN',
-                    message: 'Нажмите синюю кнопку "Скачать VPN" внизу экрана',
+                    message: 'Файл будет отправлен в чат через несколько секунд...',
                     buttons: [{type: 'ok'}]
                 });
+                
+                // Отправляем данные боту
+                tg.sendData('download_apk');
             } else {
-                // Если открыто в обычном браузере
-                alert('Для скачивания приложения откройте сайт через Telegram бота');
+                // Если открыто в обычном браузере - показываем инструкцию
+                alert('📱 Для скачивания APK файла:\n\n1. Откройте Telegram на телефоне\n2. Найдите бота @kjmgnhdbfvscdf_bot\n3. Нажмите /start\n4. Нажмите кнопку "Скачать VPN"\n\nФайл будет отправлен в чат с ботом!');
             }
         }
 
