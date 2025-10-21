@@ -834,10 +834,11 @@
         function downloadVPN() {
             if (isInTelegram) {
                 // Если открыто в Telegram Mini App
-                showPopup();
-                
                 // Отправляем данные боту
                 tg.sendData('download_from_webapp');
+                
+                // Показываем popup после отправки данных
+                // sendData автоматически закроет Mini App и вернет в чат
             } else {
                 // Если открыто в обычном браузере
                 alert('Для скачивания приложения откройте сайт через Telegram бота');
