@@ -6,7 +6,7 @@
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
-    <title>SecureVPN - Безопасный VPN для России v2.0</title>
+    <title>SecureVPN - Безопасный VPN для России v2.1</title>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <style>
         * {
@@ -698,7 +698,7 @@
 <body>
     <!-- Version indicator -->
     <div style="position: fixed; bottom: 5px; right: 5px; background: rgba(0,0,0,0.5); color: white; padding: 3px 8px; font-size: 10px; border-radius: 3px; z-index: 10000;">
-        v2.0
+        v2.1
     </div>
     
     <!-- Theme Toggle -->
@@ -862,15 +862,10 @@
             console.log('tg:', tg);
             
             if (isInTelegram && tg) {
-                console.log('In Telegram - closing and redirecting to bot');
+                console.log('In Telegram - closing Mini App');
                 
-                // Показываем уведомление
-                tg.showAlert('✅ Возвращаемся в чат...\n\nНажмите кнопку "Скачать VPN" в сообщении от бота для получения файла.');
-                
-                // Закрываем Mini App
-                setTimeout(function() {
-                    tg.close();
-                }, 1500);
+                // Просто закрываем Mini App без уведомлений
+                tg.close();
             } else {
                 console.log('Not in Telegram - showing alert');
                 // Если открыто в обычном браузере - показываем инструкцию
